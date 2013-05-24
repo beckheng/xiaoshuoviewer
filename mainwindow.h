@@ -31,10 +31,10 @@ private slots:
 
     void on_chooseDir_clicked();
 
+    void on_viewDir_clicked();
+
 private:
     Ui::MainWindow *ui;
-
-    int downResource;
 
     QWebPage *webPage;
 

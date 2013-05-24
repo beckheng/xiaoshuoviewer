@@ -71,6 +71,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QPushButton" name="viewDir">
+          <property name="text">
+           <string>查看</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>

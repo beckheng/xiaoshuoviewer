@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->ui->webView->setPage(this->webPage);
 
-    this->ui->saveTo->setText("D:/temp");
+    this->ui->saveTo->setText(QString("D:/temp"));
     this->ui->urlText->setFocus();
 }
 
@@ -46,8 +46,17 @@ void MainWindow::on_pushButton_open_clicked()
         return;
     }
 
-    this->downResource = 0;
+    this->ui->pushButton_open->setDisabled(true);
+
     this->diskCache->clear();
+
+    // 先删除保存目录
+    QDir dir(this->ui->saveTo->text());
+    if (dir.exists())
+    {
+        qDebug() << "will remove the dir";
+        dir.rmpath(dir.path());
+    }
 
     this->ui->webView->load(QUrl(this->ui->urlText->text()));
 }
@@ -62,6 +71,8 @@ void MainWindow::on_webView_loadFinished(bool ok)
     if (ok)
     {
         this->setWindowTitle(this->ui->webView->title());
+
+        this->ui->pushButton_open->setDisabled(false);
     }
     else
     {
@@ -81,8 +92,6 @@ void MainWindow::replyFinished(QNetworkReply *reply)
                 || path.endsWith(".htm") || path.endsWith(".html")
                 || path.endsWith(".pl") || path.endsWith(".php") || path.endsWith(".jsp"))
         {
-            this->downResource++;
-
             // 保存数据至文件
             QString fileName = QString("%1%2").arg(this->ui->saveTo->text()).arg(path);
             QFileInfo fileInfo(fileName);
@@ -113,4 +122,9 @@ void MainWindow::on_chooseDir_clicked()
     {
         this->ui->saveTo->setText(dir);
     }
+}
+
+void MainWindow::on_viewDir_clicked()
+{
+    // TODO:
 }
