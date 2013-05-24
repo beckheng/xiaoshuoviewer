@@ -27,9 +27,9 @@ private slots:
 
     void on_webView_loadFinished(bool arg1);
 
-    void on_pushButton_save_clicked();
-
     void replyFinished(QNetworkReply *reply);
+
+    void on_chooseDir_clicked();
 
 private:
     Ui::MainWindow *ui;
