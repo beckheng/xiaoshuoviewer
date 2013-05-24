@@ -34,10 +34,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    int okResource;
-    int unknownResource;
-
-    QVector<QUrl> saveResource;
+    int downResource;
 
     QWebPage *webPage;
 

@@ -37,9 +37,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_open_clicked()
 {
-    this->saveResource.clear();
-    this->okResource = 0;
-    this->unknownResource = 0;
+    this->downResource = 0;
 
     this->ui->webView->load(QUrl(this->ui->urlText->text()));
 }
@@ -55,7 +53,7 @@ void MainWindow::on_webView_loadFinished(bool ok)
     {
         this->setWindowTitle(this->ui->webView->title());
 
-        this->ui->pushButton_save->setText(QString("保存资源(%1)").arg(this->okResource));
+        this->ui->pushButton_save->setText(QString("保存资源(%1)").arg(this->downResource));
     }
     else
     {
