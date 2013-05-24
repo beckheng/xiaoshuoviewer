@@ -76,7 +76,7 @@ void MainWindow::replyFinished(QNetworkReply *reply)
                 qDebug() << "isFromCache = " << path;
             }
 
-            this->okResource++;
+            this->downResource++;
 
             // 保存数据至文件
             QString fileName = QString("d:/testeee%1").arg(path);
