@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-//#include <QMessageBox>
+#include <QFileDialog>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->ui->webView->setPage(this->webPage);
 
+    this->ui->saveTo->setText("D:/temp");
     this->ui->urlText->setFocus();
 }
 
@@ -37,7 +39,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_open_clicked()
 {
+    // 检查保存目录是否已经设定
+    if (this->ui->saveTo->text().isEmpty())
+    {
+        QMessageBox::warning(this, "请先选择保存目录", "请先选择保存目录");
+        return;
+    }
+
     this->downResource = 0;
+    this->diskCache->clear();
 
     this->ui->webView->load(QUrl(this->ui->urlText->text()));
 }
@@ -52,8 +62,6 @@ void MainWindow::on_webView_loadFinished(bool ok)
     if (ok)
     {
         this->setWindowTitle(this->ui->webView->title());
-
-        this->ui->pushButton_save->setText(QString("保存资源(%1)").arg(this->downResource));
     }
     else
     {
@@ -67,29 +75,29 @@ void MainWindow::replyFinished(QNetworkReply *reply)
     {
         QString path = reply->url().path();
 
-        if (this->ui->webView->url().path() != path)
+        if (path.endsWith(".js") || path.endsWith(".css")
+                || path.endsWith(".jpg") || path.endsWith(".gif")
+                || path.endsWith(".bmp")
+                || path.endsWith(".htm") || path.endsWith(".html")
+                || path.endsWith(".pl") || path.endsWith(".php") || path.endsWith(".jsp"))
         {
-            // 判断是cache数据还是网络上的数据
-            bool isFromCache = reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute).toBool();
-            if (isFromCache)
-            {
-                qDebug() << "isFromCache = " << path;
-            }
-
             this->downResource++;
 
             // 保存数据至文件
-            QString fileName = QString("d:/testeee%1").arg(path);
+            QString fileName = QString("%1%2").arg(this->ui->saveTo->text()).arg(path);
             QFileInfo fileInfo(fileName);
             if (!fileInfo.exists())
             {
                 fileInfo.dir().mkpath(fileInfo.dir().path());
             }
 
-            QFile file(fileName);
-            file.open(QIODevice::WriteOnly);
-            file.write((reply->manager()->cache()->data(reply->url()))->readAll());
-            file.close();
+            if (reply->manager()->cache()->data(reply->url()))
+            {
+                QFile file(fileName);
+                file.open(QIODevice::WriteOnly);
+                file.write(reply->manager()->cache()->data(reply->url())->readAll());
+                file.close();
+            }
         }
     }
     else
@@ -98,7 +106,11 @@ void MainWindow::replyFinished(QNetworkReply *reply)
     }
 }
 
-void MainWindow::on_pushButton_save_clicked()
+void MainWindow::on_chooseDir_clicked()
 {
-    //
+    QString dir = QFileDialog::getExistingDirectory(this, "选择保存目录");
+    if (!dir.isEmpty())
+    {
+        this->ui->saveTo->setText(dir);
+    }
 }
