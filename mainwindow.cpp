@@ -54,7 +54,6 @@ void MainWindow::on_pushButton_open_clicked()
     QDir dir(this->ui->saveTo->text());
     if (dir.exists())
     {
-        qDebug() << "will remove the dir";
         dir.rmpath(dir.path());
     }
 
