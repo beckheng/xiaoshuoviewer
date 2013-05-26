@@ -23,7 +23,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->ui->webView->setPage(this->webPage);
 
-    this->ui->saveTo->setText(QString("D:/temp"));
+#ifdef Q_OS_WIN
+    this->ui->saveTo->setText(QString("C:/temp/ud"));
+#else
+    this->ui->saveTo->setText(QString("/tmp"));
+#endif
+
     this->ui->urlText->setFocus();
 }
 
