@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
 #ifdef Q_OS_WIN
     this->ui->saveTo->setText(QString("C:/temp/ud"));
 #else
-    this->ui->saveTo->setText(QString("/tmp"));
+    this->ui->saveTo->setText(QString("/tmp/ud"));
 #endif
 
     this->ui->urlText->setFocus();
