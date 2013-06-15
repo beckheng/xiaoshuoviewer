@@ -131,4 +131,9 @@ void MainWindow::on_chooseDir_clicked()
 void MainWindow::on_viewDir_clicked()
 {
     // TODO:
+#ifdef Q_OS_WIN
+    QDesktopServices::openUrl(QUrl(QString("file:///%1").arg(this->ui->saveTo->text()), QUrl::TolerantMode));
+#else
+    QDesktopServices::openUrl(QUrl(QString("file://%1").arg(this->ui->saveTo->text()), QUrl::TolerantMode));
+#endif
 }
