@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>URL资源下载器</string>
+   <string>小说阅读</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -39,7 +39,7 @@
         <item>
          <widget class="QPushButton" name="pushButton_open">
           <property name="text">
-           <string>打开并保存</string>
+           <string>打开</string>
           </property>
           <property name="default">
            <bool>true</bool>
@@ -51,32 +51,31 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QPushButton" name="epzwSite">
           <property name="text">
-           <string>存为</string>
+           <string>e品网</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="saveTo">
-          <property name="readOnly">
-           <bool>true</bool>
+         <widget class="QPushButton" name="_59toSite">
+          <property name="text">
+           <string>59to</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="chooseDir">
-          <property name="text">
-           <string>选择</string>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="viewDir">
-          <property name="text">
-           <string>查看</string>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
           </property>
-         </widget>
+         </spacer>
         </item>
        </layout>
       </item>

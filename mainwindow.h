@@ -5,6 +5,7 @@
 #include <QtWebKit/QWebElement>
 #include <QtWebKit/QtWebKit>
 #include <QtWebKitWidgets/QWebPage>
+#include <QWebFrame>
 
 #include <QVector>
 
@@ -29,9 +30,11 @@ private slots:
 
     void replyFinished(QNetworkReply *reply);
 
-    void on_chooseDir_clicked();
+    void on_epzwSite_clicked();
 
-    void on_viewDir_clicked();
+    void on__59toSite_clicked();
+
+    void on_webView_linkClicked(const QUrl &arg1);
 
 private:
     Ui::MainWindow *ui;
