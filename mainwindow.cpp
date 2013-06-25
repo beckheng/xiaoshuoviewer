@@ -87,20 +87,33 @@ void MainWindow::replyFinished(QNetworkReply *reply)
 
 void MainWindow::on_epzwSite_clicked()
 {
-    this->ui->urlText->setText(QString("http://epzw.com/"));
+    this->ui->urlText->setText(QString("http://www.epzw.com/"));
 
     this->on_pushButton_open_clicked();
 }
 
 void MainWindow::on__59toSite_clicked()
 {
-    this->ui->urlText->setText(QString("http://59to.com/"));
+    this->ui->urlText->setText(QString("http://www.59to.com/"));
 
     this->on_pushButton_open_clicked();
 }
 
 void MainWindow::on_webView_linkClicked(const QUrl &url)
 {
-    this->ui->urlText->setText(url.toString());
-    this->on_pushButton_open_clicked();
+    QString oldUrl = this->ui->urlText->text();
+
+    bool isOpen = true;
+
+    if (!oldUrl.isEmpty() && !oldUrl.contains(url.host()))
+    {
+        // 咨询是否打开外链
+        isOpen = QMessageBox::Yes == QMessageBox::question(this, "外链咨询", QString("是否打开外链: %1 ?").arg(url.toString()), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    }
+
+    if (isOpen)
+    {
+        this->ui->urlText->setText(url.toString());
+        this->on_pushButton_open_clicked();
+    }
 }
