@@ -117,3 +117,17 @@ void MainWindow::on_webView_linkClicked(const QUrl &url)
         this->on_pushButton_open_clicked();
     }
 }
+
+void MainWindow::on_pushButton_qidian_clicked()
+{
+    this->ui->urlText->setText(QString("http://www.qidian.com/"));
+
+    this->on_pushButton_open_clicked();
+}
+
+void MainWindow::on_pushButton_motie_clicked()
+{
+    this->ui->urlText->setText(QString("http://www.motie.com/"));
+
+    this->on_pushButton_open_clicked();
+}

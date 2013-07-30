@@ -65,6 +65,20 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="pushButton_qidian">
+          <property name="text">
+           <string>起点中文</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_motie">
+          <property name="text">
+           <string>磨铁</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>

@@ -36,6 +36,10 @@ private slots:
 
     void on_webView_linkClicked(const QUrl &arg1);
 
+    void on_pushButton_qidian_clicked();
+
+    void on_pushButton_motie_clicked();
+
 private:
     Ui::MainWindow *ui;
 
