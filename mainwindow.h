@@ -47,6 +47,8 @@ private:
 
     QNetworkAccessManager *manager;
     QNetworkDiskCache *diskCache;
+
+    bool isSameDomain(QString, QString);
 };
 
 #endif // MAINWINDOW_H

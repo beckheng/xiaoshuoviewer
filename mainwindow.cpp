@@ -105,7 +105,7 @@ void MainWindow::on_webView_linkClicked(const QUrl &url)
 
     bool isOpen = true;
 
-    if (!oldUrl.isEmpty() && !oldUrl.contains(url.host()))
+    if (!oldUrl.isEmpty() && !this->isSameDomain(oldUrl, url.host()))
     {
         // 咨询是否打开外链
         isOpen = QMessageBox::Yes == QMessageBox::question(this, "外链咨询", QString("是否打开外链: %1 ?").arg(url.toString()), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
@@ -116,6 +116,29 @@ void MainWindow::on_webView_linkClicked(const QUrl &url)
         this->ui->urlText->setText(url.toString());
         this->on_pushButton_open_clicked();
     }
+}
+
+bool MainWindow::isSameDomain(QString url1, QString url2)
+{
+    QUrl curUrl = QUrl(url1);
+
+    QStringList list1 = curUrl.host().replace(QString("http://"), "").replace(QString("https://"), "").replace(QString("/"), "").split(QString("."));
+    QStringList list2 = url2.replace(QString("http://"), "").replace(QString("https://"), "").replace(QString("/"), "").split(QString("."));
+
+    QVector<QString> v1;
+    QVector<QString> v2;
+
+    for (int i = list1.size() - 1; i > 0; i--)
+    {
+        v1.append(list1.at(i));
+    }
+
+    for (int i = list2.size() - 1; i > 0; i--)
+    {
+        v2.append((list2.at(i)));
+    }
+
+    return (v1.at(0).compare(v2.at(0)) == 0) && (v1.at(1).compare(v2.at(1)) == 0);
 }
 
 void MainWindow::on_pushButton_qidian_clicked()
