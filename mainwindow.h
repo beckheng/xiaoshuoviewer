@@ -40,6 +40,8 @@ private slots:
 
     void on_pushButton_motie_clicked();
 
+    void on_pushButton_recommend_clicked();
+
 private:
     Ui::MainWindow *ui;
 

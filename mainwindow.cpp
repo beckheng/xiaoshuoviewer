@@ -24,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->ui->webView->setPage(this->webPage);
 
+    this->on_pushButton_recommend_clicked();
+
     this->ui->urlText->setFocus();
 }
 
@@ -105,10 +107,13 @@ void MainWindow::on_webView_linkClicked(const QUrl &url)
 
     bool isOpen = true;
 
-    if (!oldUrl.isEmpty() && !this->isSameDomain(oldUrl, url.host()))
+    if (!(oldUrl.compare(QString("http://")) == 0 || oldUrl.compare(QString("")) == 0))
     {
-        // 咨询是否打开外链
-        isOpen = QMessageBox::Yes == QMessageBox::question(this, "外链咨询", QString("是否打开外链: %1 ?").arg(url.toString()), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+        if (!oldUrl.isEmpty() && !this->isSameDomain(oldUrl, url.host()))
+        {
+            // 咨询是否打开外链
+            isOpen = QMessageBox::Yes == QMessageBox::question(this, "外链咨询", QString("是否打开外链: %1 ?").arg(url.toString()), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+        }
     }
 
     if (isOpen)
@@ -153,4 +158,11 @@ void MainWindow::on_pushButton_motie_clicked()
     this->ui->urlText->setText(QString("http://www.motie.com/"));
 
     this->on_pushButton_open_clicked();
+}
+
+void MainWindow::on_pushButton_recommend_clicked()
+{
+    this->ui->urlText->setText(QString("http://"));
+
+    this->ui->webView->load(QUrl(QString("http://www.yixinit.com/xiaoshuo.html")));
 }

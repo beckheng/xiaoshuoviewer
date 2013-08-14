@@ -51,6 +51,13 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
+         <widget class="QPushButton" name="pushButton_recommend">
+          <property name="text">
+           <string>小说推荐</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="epzwSite">
           <property name="text">
            <string>e品网</string>
