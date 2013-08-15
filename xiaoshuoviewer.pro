@@ -14,8 +14,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    myqwebpage.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    myqwebpage.h
 
 FORMS    += mainwindow.ui

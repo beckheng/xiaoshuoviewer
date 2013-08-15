@@ -18,9 +18,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(manager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(replyFinished(QNetworkReply*)));
 
-    this->webPage = new QWebPage(this);
+    this->webPage = new MyQWebPage(this);
     this->webPage->setNetworkAccessManager(manager);
     this->webPage->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+
+    connect(this->webPage,SIGNAL(formSubmitted(const QNetworkRequest&)),this,SLOT(OnFormSubmitted(const QNetworkRequest&)));
 
     this->ui->webView->setPage(this->webPage);
 
@@ -85,6 +87,11 @@ void MainWindow::replyFinished(QNetworkReply *reply)
     {
         qDebug() << reply->errorString();
     }
+}
+
+void MainWindow::OnFormSubmitted(const QNetworkRequest &request)
+{
+    this->on_webView_linkClicked(request.url());
 }
 
 void MainWindow::on_epzwSite_clicked()

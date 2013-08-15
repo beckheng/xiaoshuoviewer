@@ -9,6 +9,8 @@
 
 #include <QVector>
 
+#include <myqwebpage.h>
+
 namespace Ui {
 class MainWindow;
 }
@@ -42,10 +44,12 @@ private slots:
 
     void on_pushButton_recommend_clicked();
 
+    void OnFormSubmitted(const QNetworkRequest &request);
+
 private:
     Ui::MainWindow *ui;
 
-    QWebPage *webPage;
+    MyQWebPage *webPage;
 
     QNetworkAccessManager *manager;
     QNetworkDiskCache *diskCache;
