@@ -71,6 +71,14 @@ void MainWindow::on_webView_loadFinished(bool ok)
         {
             // TODO
         }
+        else if (url.contains("gdsanlian.com"))
+        {
+            QWebElement element = frame->findFirstElement("div");
+            if (!element.isNull())
+            {
+                element.setStyleProperty("display", "none");
+            }
+        }
     }
     else
     {
