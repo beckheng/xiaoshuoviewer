@@ -118,11 +118,11 @@ void MainWindow::on__59toSite_clicked()
 
 void MainWindow::on_webView_linkClicked(const QUrl &url)
 {
-    QString oldUrl = this->ui->urlText->text();
+    QString oldUrl = this->ui->webView->url().toString();
 
     bool isOpen = true;
 
-    if (!(oldUrl.compare(QString("http://")) == 0 || oldUrl.compare(QString("")) == 0))
+    if (!(oldUrl.contains(QString("yixinit.com")) || oldUrl.compare(QString("")) == 0))
     {
         if (!oldUrl.isEmpty() && !this->isSameDomain(oldUrl, url.host()))
         {
